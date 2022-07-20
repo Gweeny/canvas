@@ -1,0 +1,71 @@
+.picture{
+    cursor: move;
+}
+
+.canvas{
+    height: 600px;
+    width: 100vw;
+    background-color: rgb(246, 227, 227);
+    border: 1px solid #000;
+    border-radius: 5px;
+    position: relative;
+}
+#frame{
+    border: #000 solid 1px;
+}
+#actions{
+    border: #000 solid 1px;
+    width: 40px;
+    height: 40px;
+}
+
+
+.action-remove {
+    border: 2px solid #f00;
+    color: #f00;
+    width: 12px;
+    height: 10px;
+    
+    }
+    .action-zoomIn {
+    border: 2px solid #0f0;
+    color: #0f0;
+    width: 12px;
+    height: 10px;
+    
+    }
+    .action-zoomOut {
+    border: 2px solid #00f;
+    color: #00f;
+    width: 12px;
+    height: 10px;
+    
+    
+    
+    }
+    .action-moveCloser {
+    border: 2px solid #ff0;
+    color: #ff0;
+    width: 12px;
+    height: 10px;
+    
+    
+    
+    }
+    .action-moveAway {
+    border: 2px solid #0ff;
+    color: #0ff;
+    width: 12px;
+    height: 10px;
+    
+    }
+    .action-mirror {
+    border: 2px solid #f0f;
+    color: #f0f;
+    width: 12px;
+    height: 10px;
+    }
+
+    .container{
+    overflow: hidden;
+    }
