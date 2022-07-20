@@ -48,6 +48,7 @@ function addImage(id){
     image.setAttribute('id', "stickers" + compteurIdOfImage);
     let class_name = "foo";
     image.setAttribute('class', class_name);
+    image.style.position = "relative";
 
     return image;
 }
@@ -127,13 +128,7 @@ function actions(id,id_parent){
             document.getElementById(id).appendChild(buttonMoveCloser);
             buttonMoveCloser.addEventListener('click', function() {
                 const divToMoveCloser = document.getElementById(this.parentNode.parentNode.firstChild.id);
-                if (divToMoveCloser.classList.contains('moveCloser')) {
-                    divToMoveCloser.style.transform = 'translateZ(0px)';
-                    divToMoveCloser.classList.remove('moveCloser');
-                } else {
-                    divToMoveCloser.style.transform = 'translateZ(-100px)';
-                    divToMoveCloser.classList.add('moveCloser');
-                }
+                divToMoveCloser.style.zIndex = "1";
 
             }
             )
@@ -151,8 +146,7 @@ function actions(id,id_parent){
             buttonMirror.setAttribute("class", "action-mirror");
             document.getElementById(id).appendChild(buttonMirror);
             buttonMirror.addEventListener('click', function () {
-                console.log(typeof(this.parentNode.parentNode.parentNode.style.transform));
-                        const img = document.querySelector('#winnie');
+                        const img = document.getElementById(this.parentNode.parentNode.firstChild.id);
                         if(img.classList.contains('mirror')){
                             img.style.transform = 'scale(1)';
                             img.classList.remove('mirror');
