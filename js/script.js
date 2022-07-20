@@ -1,6 +1,8 @@
 let compteurIdOfDiv = 0;
 let compteurIdOfImage = 0;
-let compteurIdOfChildDiv = 0
+let compteurIdOfChildDiv = 0;
+let zIndexOfImage  = 0;
+
 
 
 function getCanvasXSize() {
@@ -28,7 +30,9 @@ function addDiv(){
     $(div).draggable();
     div.height=120;
     div.width=120;
+    div.style.zIndex = compteurIdOfDiv;
     addAnotherDiv(divId)
+
 }
 
 function placeDiv(x_pos,y_pos,id){
@@ -49,7 +53,7 @@ function addImage(id){
     let class_name = "foo";
     image.setAttribute('class', class_name);
     image.style.position = "relative";
-
+    image.setAttribute('data-id', compteurIdOfImage);
     return image;
 }
 
@@ -127,20 +131,52 @@ function actions(id,id_parent){
             buttonMoveCloser.setAttribute("class", "action-moveCloser");
             document.getElementById(id).appendChild(buttonMoveCloser);
             buttonMoveCloser.addEventListener('click', function() {
-                const divToMoveCloser = document.getElementById(this.parentNode.parentNode.firstChild.id);
-                divToMoveCloser.style.zIndex = "1";
+                console.log(document.querySelectorAll('.ui-draggable'));
+                const frames = document.querySelectorAll('.ui-draggable');
+                for (var i = 0; i < frames.length; i++) {
+                    // frames[i].style.zIndex = i;
+                    const parentNodeId = this.parentNode.parentNode.id;
+                    console.log(parentNodeId);
+                    const elementId = parseInt(parentNodeId.slice(5,6));
+                    console.log(elementId);
+                    const parentNode = this.parentNode.parentNode;
+                    if(elementId != frames.length){
+                        if(parentNodeId == parentNode.id){
+                        const zIndex = elementId + 1;
+                        if(elementId != 1){
+                            const newId =  elementId -1;
+                            console.log(newId);
+                            parentNode.id = "frame" + newId;
+                            
+                        }else{
+                            const newId =  elementId +1;
+                            parentNode.id = "frame" + newId;
+                        }
+                        parentNode.style.zIndex = zIndex;
+                        const zIndex2 = elementId;
+                        document.querySelector("frame" + zIndex).style.zIndex = zIndex2;
+                        document.querySelector("frame" + zIndex).id = "frame" + zIndex2;
+                        
+                        // if(parentNode.nextSibling.nextSibling.id = "frame" + zIndex2){
+                        // const zIndex3 = elementId +2;
+                        // parentNode.nextSibling.nextSibling.id = "frame" + zIndex3;
+                        // parentNode.nextSibling.nextSibling.style.zIndex = zIndex3;
+                    }
+                }
+                    
+                }
 
             }
             )
         
-            var buttonMoveAway = document.createElement('button');
-            buttonMoveAway.setAttribute("class", "action-moveAway");
-            document.getElementById(id).appendChild(buttonMoveAway);
-            buttonMoveAway.addEventListener('click', function() {
-                const divToMoveAway = document.getElementById(this.parentNode.parentNode.firstChild.id);
-                divToMoveAway.style.zIndex = "-1";
-            }
-            )
+            // var buttonMoveAway = document.createElement('button');
+            // buttonMoveAway.setAttribute("class", "action-moveAway");
+            // document.getElementById(id).appendChild(buttonMoveAway);
+            // buttonMoveAway.addEventListener('click', function() {
+            //     const divToMoveAway = document.getElementById(this.parentNode.parentNode.firstChild.id);
+            //     divToMoveAway.style.zIndex = "-1";
+            // }
+            // )
         
             var buttonMirror = document.createElement('button');
             buttonMirror.setAttribute("class", "action-mirror");
